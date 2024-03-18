@@ -1,20 +1,34 @@
-powerSequence :: Int -> [Int]
-powerSequence n = map (\x -> x^x) [n..]
+import Data.List (unfoldr)
 
-splitList :: [a] -> [Int] -> [[a]]
-splitList [] _ = []
-splitList xs [] = [xs]
-splitList xs (n:ns) = first : splitList rest ns
-  where
-    (first, rest) = splitAt n xs
+splitList :: [a] -> [[a]]
+splitList xs = reverse $ splitListHelper (reverse xs) 1 []
+
+splitListHelper :: [a] -> Int -> [[a]] -> [[a]]
+splitListHelper [] _ acc = acc
+splitListHelper inputList n acc =
+  let (subList, remaining) = takePowerElements inputList n
+      subListLength = length subList
+      nextN = n + 1
+      reversedSubList = reverse subList
+   in splitListHelper remaining nextN (reversedSubList : acc)
+
+
+takePowerElements :: [a] -> Int -> ([a], [a])
+takePowerElements list n =
+  let listLength = length list
+      nth = n ^ n
+   in if listLength >= nth
+        then splitAt nth list
+        else (list, [])
+        
+reverseOutput :: [[a]] -> [[a]]
+reverseOutput = reverse
 
 main :: IO ()
 main = do
-    putStrLn "Enter space-separated numbers:"
-    input <- getLine
-    let numbers = map read (words input) :: [Int]
-        maxLength = length numbers
-        powers = reverse (takeWhile (<= maxLength) (concatMap powerSequence [1..]))
-        sublists = splitList numbers powers
-    putStrLn "Sublists: "
-    mapM_ print sublists
+  putStrLn "Enter a list of integers separated by space:"
+  input <- getLine
+  let inputList = map read $ words input :: [Int]
+  let outputListsReversed = splitList inputList
+  let outputLists = reverse outputListsReversed
+  mapM_ (\(index, sublist) -> putStrLn $ "Sub-list with " ++ show (length sublist) ++ " elements: " ++ show sublist) (zip [1..] outputLists)
