@@ -31,4 +31,5 @@ main = do
   let inputList = map read $ words input :: [Int]
   let outputListsReversed = splitList inputList
   let outputLists = reverse outputListsReversed
-  mapM_ (\(index, sublist) -> putStrLn $ "Sub-list with " ++ show (length sublist) ++ " elements: " ++ show sublist) (zip [1..] outputLists)
+  putStrLn "Output with sublists:"
+  putStrLn $ show outputLists
