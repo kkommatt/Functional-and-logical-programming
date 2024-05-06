@@ -8,3 +8,5 @@ Lab1_2: Divide the list into two lists according to the condition "to be or not 
 Lab2: Split the given list into several sublists so that the last sublist contains 1^1 elements in the penultimate one - 2^2 elements from the end of the list, etc.
 
 Lab3: For a given natural number k, find all words of length k that are allowed by a finite automaton.
+
+Lab4: Provide an equivalent transformation of an irreducible grammar in order to eliminate rules of the form X → Y, where Y is a nonterminal symbol (removal of unit products).
