@@ -19,3 +19,5 @@ Program and test a binary Maybe-function to evaluate the last of the three expre
 Program and test the Maybe-function using monadic operations to compute the following superposition when the first function from paragraph 1) is substituted for the binary function mentioned above (in paragraph 3) instead of its first argument, and the second function is substituted for the second argument:
 the desired function is represented using do-notation (1 point).
 represent the desired function without using do-notation (2 points).
+
+Lab6: Development of a simple expert system
