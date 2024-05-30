@@ -47,34 +47,13 @@ remove_unit_productions(Grammar, NewGrammar) :-
 is_unit_production_rule((_, Right)) :-
     is_unit_production(Right).
 
-% Main function to run the program
-main :-
-    write('Enter grammar rules (end with an empty line):'), nl,
-    read_rules([], Rules),
-    process_rules(Rules).
+grammar([
+    ('S', 'aA'),
+    ('A', 'B'),
+    ('B', 'c')
+]).
 
-% Read rules from user input
-read_rules(Acc, Rules) :-
-    read_line_to_string(user_input, Line),
-    ( Line = "" ->
-        reverse(Acc, Rules)
-    ; 
-        ( parse_rule(Line, Rule) ->
-            read_rules([Rule|Acc], Rules)
-        ;
-            write('Invalid rule format, try again'), nl,
-            read_rules(Acc, Rules)
-        )
-    ).
-
-% Process the rules to remove unit productions
-process_rules(Rules) :-
-    remove_unit_productions(Rules, ResultingGrammar),
-    write('Resulting Grammar:'), nl,
-    print_rules(ResultingGrammar).
-
-% Print rules
-print_rules([]).
-print_rules([(A, B)|Rest]) :-
-    format('~w -> ~w~n', [A, B]),
-    print_rules(Rest).
+% Run the removal of unit productions
+test_remove_unit_productions(NewGrammar) :-
+    grammar(Grammar),
+    remove_unit_productions(Grammar, NewGrammar).
